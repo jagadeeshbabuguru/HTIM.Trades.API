@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Text.Json" Version="6.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HTIM.Trades.Data\HTIM.Trades.Data.csproj" />
+    <ProjectReference Include="..\HTIM.Trades.Model\HTIM.Trades.Model.csproj" />
+    <ProjectReference Include="..\HTIM.Trades.Services\HTIM.Trades.Services.csproj" />
+  </ItemGroup>
+
+</Project>

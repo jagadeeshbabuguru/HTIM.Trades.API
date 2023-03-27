@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTIM.Trades.Api", "HTIM.Trades.Api\HTIM.Trades.Api.csproj", "{8FC71343-1353-400E-AA06-C9FCF292A3DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTIM.Trades.Model", "HTIM.Trades.Model\HTIM.Trades.Model.csproj", "{F657A59D-295A-4020-AD98-7770B476A202}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTIM.Trades.Data", "HTIM.Trades.Data\HTIM.Trades.Data.csproj", "{BECD2EE6-3DCA-4476-873F-559ECF52F44E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTIM.Trades.Services", "HTIM.Trades.Services\HTIM.Trades.Services.csproj", "{3BA1C921-502F-4B3C-A199-0ED429BAFFF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTIM.Trades.Business", "HTIM.Trades.Business\HTIM.Trades.Business.csproj", "{A0FDB7E7-1CFB-420D-983A-613FA19E39DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTIM.Trades.Testing", "HTIM.Trades.Testing\HTIM.Trades.Testing.csproj", "{E6E4FDBD-AF69-4869-AC1C-8F7FB1407311}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FC71343-1353-400E-AA06-C9FCF292A3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC71343-1353-400E-AA06-C9FCF292A3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC71343-1353-400E-AA06-C9FCF292A3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC71343-1353-400E-AA06-C9FCF292A3DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F657A59D-295A-4020-AD98-7770B476A202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F657A59D-295A-4020-AD98-7770B476A202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F657A59D-295A-4020-AD98-7770B476A202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F657A59D-295A-4020-AD98-7770B476A202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECD2EE6-3DCA-4476-873F-559ECF52F44E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECD2EE6-3DCA-4476-873F-559ECF52F44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECD2EE6-3DCA-4476-873F-559ECF52F44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECD2EE6-3DCA-4476-873F-559ECF52F44E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA1C921-502F-4B3C-A199-0ED429BAFFF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA1C921-502F-4B3C-A199-0ED429BAFFF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA1C921-502F-4B3C-A199-0ED429BAFFF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA1C921-502F-4B3C-A199-0ED429BAFFF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0FDB7E7-1CFB-420D-983A-613FA19E39DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0FDB7E7-1CFB-420D-983A-613FA19E39DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0FDB7E7-1CFB-420D-983A-613FA19E39DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0FDB7E7-1CFB-420D-983A-613FA19E39DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E4FDBD-AF69-4869-AC1C-8F7FB1407311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E4FDBD-AF69-4869-AC1C-8F7FB1407311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E4FDBD-AF69-4869-AC1C-8F7FB1407311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E4FDBD-AF69-4869-AC1C-8F7FB1407311}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CC6F44E-5D54-4AE7-9FFD-91AC9BBC801D}
+	EndGlobalSection
+EndGlobal
