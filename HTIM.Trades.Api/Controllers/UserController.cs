@@ -14,7 +14,7 @@ namespace HTIM.Trades.Api.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Produces(MediaTypeNames.Application.Json)]
-    //[Authorize]
+    [Authorize]
     public class UserController : Controller
     {
         public UserController()
