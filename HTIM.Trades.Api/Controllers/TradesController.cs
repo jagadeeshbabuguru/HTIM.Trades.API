@@ -19,10 +19,10 @@ namespace HTIM.Trades.Api.Controllers
             this._TradesFacade = TradesFacade;
         }
         [HttpGet("getalltrades")]
-        [Authorize(Policy = "AppRights")]
-        public async Task<List<TradesOverride>> GetAllTrades()
+        //[Authorize(Policy = "AppRights")]
+        public async Task<List<Trade>> GetAllTrades()
         {
-             List <TradesOverride> result = await this._TradesFacade.GetAllTrades();
+             List <Trade> result = await this._TradesFacade.GetAllTrades();
             return result;
         }
         //[HttpGet("getlogbyprocess")]

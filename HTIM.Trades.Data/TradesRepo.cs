@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using HTIM.Trades.Model;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace HTIM.Trades.Data
 {
@@ -20,12 +22,26 @@ namespace HTIM.Trades.Data
             return processLogs.ToList();
         }
 
-        public async Task<List<TradesOverride>> GetAllTrades()
+        public async Task<List<Trade>> GetAllCleanTrades()
         {
-            IEnumerable<TradesOverride> processLogs = await GetTableValues<TradesOverride>("TradesViewer.GetAllTrades", false, false, false, null, null, null);
-            //IEnumerable<TradesOverride> processLogs = await GetTableValues<TradesOverride>("TradesViewer.GetAllTrades");
-            return processLogs.ToList();
+            IEnumerable<Trade> cleanTrades = await GetTableValuesBySp<Trade>("TradesViewer.GetAllCleanTrades");
+            IEnumerable<TradesOverride> overrides = await GetTableValuesBySp<TradesOverride>("TradesViewer.GetAllTradeOverrides");
+            
+            cleanTrades.ToList().ForEach(trade =>
+            {
+                if (trade.Overrides == null)
+                    trade.Overrides = new List<TradesOverride>();
+                trade.Overrides.AddRange(overrides.Where(x => x.TradesOverrideID == trade.RowID));
+            });
+            return cleanTrades.ToList();
         }
+
+        public async Task<List<TradesOverride>> GetAllOverrides()
+        {
+           
+            return new List<TradesOverride>();
+        }
+
 
         public async Task<List<TradesOverride>> GetOutOfThresholdLogsByDate(DateTime fromDate, DateTime toDate)
         {
@@ -115,12 +131,9 @@ namespace HTIM.Trades.Data
             var dataTable = new DataTable();
             try
             {
-                using (_connection)
-                {
                     _connection.Open();
                     returnVal = await _connection.QueryAsync<T>(spName, commandType: CommandType.StoredProcedure);
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {
@@ -129,5 +142,6 @@ namespace HTIM.Trades.Data
             return returnVal;
         }
 
+       
     }
 }

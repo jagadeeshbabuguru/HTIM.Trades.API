@@ -9,15 +9,7 @@ namespace HTIM.Trades.Services
 {
     public interface ITradesService
     {
-        Task<List<TradesOverride>> GetAllTrades();
-        Task<List<TradesOverride>> GetAllOutOfThresholdLogs();
-        Task<List<TradesOverride>> GetLogsFilteredByProcessCode(string batchProcessCode);
-        Task<List<TradesOverride>> GetOOTLogsFilteredByProcessCode(string batchProcessCode);
-        Task<List<TradesOverride>> GetLogsFilteredByDate(DateTime fromDate, DateTime toDate);
-        Task<List<TradesOverride>> GetOutOfThresholdLogsByDate(DateTime fromDate, DateTime toDate);
-        Task<List<TradesOverride>> GetLogsByCodeAndDate(string processCode, DateTime fromDate, DateTime toDate);
-        Task<List<TradesOverride>> GetOOTLogsByCodeAndDate(string processCode, DateTime fromDate, DateTime toDate);
-        Task<List<Processes>> getProcesses(string months);
+        Task<List<Trade>> GetAllTrades();
         Task<List<ChartInfo>> getChartInfo(string months);
     }
 }
