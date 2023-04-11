@@ -2,20 +2,22 @@
 using System.Runtime.CompilerServices;
 using HTIM.Trades.Data;
 using HTIM.Trades.Model;
+using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace HTIM.Trades.Services
 {
     public class TradesService : ITradesService
     {
-        private readonly ITradesRepo _blogRepo;
+        private readonly ITradesRepo _tradeRepo;
 
-        public TradesService(ITradesRepo batchRepo)
+        public TradesService(ITradesRepo tradeRepo)
         {
-            this._blogRepo = batchRepo;
+            this._tradeRepo = tradeRepo;
         }
         public async Task<List<Trade>> GetAllTrades()
         {
-            List<Trade> trades = await _blogRepo.GetAllCleanTrades();
+            List<Trade> trades = await _tradeRepo.GetAllCleanTrades();
             //List<TradesOverride> tradeOverrides = await _blogRepo.GetAllOverrides();
            
             return trades;
@@ -70,5 +72,28 @@ namespace HTIM.Trades.Services
 
             return new List<ChartInfo>();
         }
+
+        private async Task<List<Trade>> deserializeTrades(string jsonData)
+        {
+            List<Trade> result = null;
+            try
+            {
+                result = JsonSerializer.Deserialize<List<Trade>>(jsonData);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+
+        public async Task<bool> updateTrades(string trades)
+        {
+            List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
+            return await _tradeRepo.updateTrades(tradesList);
+        }
+
+
     }
 }

@@ -7,16 +7,16 @@ namespace HTIM.Trades.Business.Facade
 {
     public class TradesFacade : ITradesFacade
     {
-        private readonly ITradesService _batchLogService;
+        private readonly ITradesService _tradeService;
 
-        public TradesFacade(ITradesService batchService)
+        public TradesFacade(ITradesService tradeService)
         {
-            _batchLogService = batchService;
+            _tradeService = tradeService;
         }
 
         public async Task<List<Trade>> GetAllTrades()
         {
-            return await _batchLogService.GetAllTrades();
+            return await _tradeService.GetAllTrades();
         }
 
         //public async Task<List<TradesOverride>> GetAllOutOfThresholdLogs()
@@ -79,7 +79,12 @@ namespace HTIM.Trades.Business.Facade
 
         public async Task<List<ChartInfo>> getChartInfo(string months)
         {
-            return await _batchLogService.getChartInfo(months);
+            return await _tradeService.getChartInfo(months);
+        }
+
+        public async Task<bool> updateTrades(string trades)
+        {
+            return await _tradeService.updateTrades(trades);
         }
         //public async Task<List<TradesOverride>> GetLogsByCodeAndDate(string processCode, string fromDate, string toDate)
         //{

@@ -11,5 +11,6 @@ namespace HTIM.Trades.Services
     {
         Task<List<Trade>> GetAllTrades();
         Task<List<ChartInfo>> getChartInfo(string months);
+        Task<bool> updateTrades(string trades);
     }
 }

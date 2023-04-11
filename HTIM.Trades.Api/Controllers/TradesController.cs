@@ -10,7 +10,7 @@ namespace HTIM.Trades.Api.Controllers
     [Route("v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class TradesController : Controller
     {
         private ITradesFacade _TradesFacade;
@@ -19,12 +19,22 @@ namespace HTIM.Trades.Api.Controllers
             this._TradesFacade = TradesFacade;
         }
         [HttpGet("getalltrades")]
-        //[Authorize(Policy = "AppRights")]
+        [Authorize(Policy = "AppRights")]
         public async Task<List<Trade>> GetAllTrades()
         {
              List <Trade> result = await this._TradesFacade.GetAllTrades();
             return result;
         }
+
+        [HttpGet("updatetrade")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<bool> updatetrade(string tradesToUpdate)
+        {
+
+            bool result = await this._TradesFacade.updateTrades(tradesToUpdate);
+            return result;
+        }
+
         //[HttpGet("getlogbyprocess")]
         //[Authorize(Policy = "AppRights")]
         //public async Task<List<TradeLogs>> GetLogsByProcessName(string batchProcessName)

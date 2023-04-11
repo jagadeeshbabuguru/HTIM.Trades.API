@@ -26,12 +26,11 @@ namespace HTIM.Trades.Data
         {
             IEnumerable<Trade> cleanTrades = await GetTableValuesBySp<Trade>("TradesViewer.GetAllCleanTrades");
             IEnumerable<TradesOverride> overrides = await GetTableValuesBySp<TradesOverride>("TradesViewer.GetAllTradeOverrides");
-            
             cleanTrades.ToList().ForEach(trade =>
             {
-                if (trade.Overrides == null)
-                    trade.Overrides = new List<TradesOverride>();
-                trade.Overrides.AddRange(overrides.Where(x => x.TradesOverrideID == trade.RowID));
+                if (trade.overrides == null)
+                    trade.overrides =  new List<TradesOverride>();
+                trade.overrides.AddRange(overrides.Where(x => x.tradesOverrideID == trade.rowID));
             });
             return cleanTrades.ToList();
         }
@@ -142,6 +141,9 @@ namespace HTIM.Trades.Data
             return returnVal;
         }
 
-       
+        public Task<bool> updateTrades(List<Trade> trades)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
