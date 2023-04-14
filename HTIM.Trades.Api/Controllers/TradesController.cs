@@ -28,79 +28,25 @@ namespace HTIM.Trades.Api.Controllers
 
         [HttpGet("updatetrade")]
         [Authorize(Policy = "AppRights")]
-        public async Task<bool> updatetrade(string tradesToUpdate)
+        public async Task<bool> updatetrade(string tradesToUpdate,string overridesToUpdate)
         {
-
-            bool result = await this._TradesFacade.updateTrades(tradesToUpdate);
+            bool result = await this._TradesFacade.updateTrades(tradesToUpdate,overridesToUpdate);
             return result;
         }
 
-        //[HttpGet("getlogbyprocess")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetLogsByProcessName(string batchProcessName)
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetLogsFilteredByProcessCode(batchProcessName);
-        //    return result;
-        //}
-        //[HttpGet("getlogbydate")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetLogsByDate(string fromDate,string toDate)
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetLogsFilteredByDate(fromDate, toDate);
-        //    return result;
-        //}
-        //[HttpGet("getlogbycodeanddate")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetLogsByCodeAndDate(string batchProcessName, string fromDate, string toDate)
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetLogsByCodeAndDate(batchProcessName,fromDate, toDate);
-        //    return result;
-        //}
-        //[HttpGet("getoutofthresholdlogs")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetAllOutOfThresholdLogs()
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetAllOutOfThresholdLogs();
-        //    return result;
-        //}
-
-        //[HttpGet("getoutofthresholdlogsbyprocess")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetAllOutOfThresholdLogsByProcess(string batchProcessName)
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetOOTLogsFilteredByProcessCode(batchProcessName);
-        //    return result;
-        //}
-
-        //[HttpGet("getoutofthresholdbydate")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetOutOfThresholdLogsByDate(string fromDate, string toDate)
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetOutOfThresholdLogsByDate(fromDate,toDate);
-        //    return result;
-        //}
-        //[HttpGet("getootlogsbycodeanddate")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<TradeLogs>> GetOOTLogsCodeByDate(string batchProcessName, string fromDate, string toDate)
-        //{
-        //    List<TradeLogs> result = await _TradesFacade.GetOOTLogsByCodeAndDate(batchProcessName,fromDate, toDate);
-        //    return result;
-        //}
-
-        //[HttpGet("getprocessdatacount")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<Processes>> GetProcessData(string months)
-        //{
-        //    List<Processes> result = await _TradesFacade.getProcesses(months);
-        //    return result;
-        //}
-
-        //[HttpGet("getChartInfo")]
-        //[Authorize(Policy = "AppRights")]
-        //public async Task<List<ChartInfo>> GetChartInfo(string months)
-        //{
-        //    List<ChartInfo> result = await _TradesFacade.getChartInfo(months);
-        //    return result;
-        //}
+        [HttpGet("deletetrade")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<bool> deletetrade(string tradesToUpdate, string overridesToUpdate)
+        {
+            bool result = await this._TradesFacade.deleteTrades(tradesToUpdate, overridesToUpdate);
+            return result;
+        }
+        [HttpGet("createtrade")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<bool> createtrade(string tradesToUpdate, string overridesToUpdate)
+        {
+            bool result = await this._TradesFacade.insertTrades(tradesToUpdate, overridesToUpdate);
+            return result;
+        }
     }
 }

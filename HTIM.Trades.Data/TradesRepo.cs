@@ -145,5 +145,29 @@ namespace HTIM.Trades.Data
         {
             throw new NotImplementedException();
         }
+        public Task<bool> updateOverrides(List<TradesOverride> overrides)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> deleteTrades(List<Trade> trades)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> deleteOverrides(List<TradesOverride> overrides)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> insertTrades(List<Trade> trades)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> insertOverrides(List<TradesOverride> overrides)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

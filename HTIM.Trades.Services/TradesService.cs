@@ -87,13 +87,49 @@ namespace HTIM.Trades.Services
 
             return result;
         }
-
-        public async Task<bool> updateTrades(string trades)
+        private async Task<List<TradesOverride>> deserializeTradeOverrides(string jsonData)
         {
-            List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
-            return await _tradeRepo.updateTrades(tradesList);
+            List<TradesOverride> result = null;
+            try
+            {
+                result = JsonSerializer.Deserialize<List<TradesOverride>>(jsonData);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
 
+        public async Task<bool> updateTrades(string trades,string overrides)
+        {
+            bool isTradeeSuccess,isOverrideSuccess = false;
+            List<Trade> tradesList = await this.deserializeTrades(trades);
+            List<TradesOverride> overridesList = await this.deserializeTradeOverrides(overrides);
+            isTradeeSuccess = await _tradeRepo.updateTrades(tradesList);
+            isOverrideSuccess = await _tradeRepo.updateOverrides(overridesList);
+            return (isTradeeSuccess&&isOverrideSuccess)?true:false;
+        }
 
+        public async Task<bool> deleteTrades(string trades, string overrides)
+        {
+            bool isTradeeSuccess, isOverrideSuccess = false;
+            List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
+            List<TradesOverride> overridesList = await this.deserializeTradeOverrides(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
+            isTradeeSuccess = await _tradeRepo.deleteTrades(tradesList);
+            isOverrideSuccess = await _tradeRepo.deleteOverrides(overridesList);
+            return (isTradeeSuccess && isOverrideSuccess) ? true : false;
+        }
+
+        public async Task<bool> insertTrades(string trades, string overrides)
+        {
+            bool isTradeeSuccess, isOverrideSuccess = false;
+            List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
+            List<TradesOverride> overridesList = await this.deserializeTradeOverrides(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
+            isTradeeSuccess = await _tradeRepo.insertTrades(tradesList);
+            isOverrideSuccess = await _tradeRepo.insertOverrides(overridesList);
+            return (isTradeeSuccess && isOverrideSuccess) ? true : false;
+        }
     }
 }
