@@ -31,7 +31,7 @@ namespace HTIM.Trades.Business.Facade
 
         public async Task<bool> insertTrades(string trades, string overrides)
         {
-            return await _tradeService.deleteTrades(trades, overrides);
+            return await _tradeService.insertTrades(trades, overrides);
         }
 
         public async Task<bool> updateTrades(string trades, string overrides)

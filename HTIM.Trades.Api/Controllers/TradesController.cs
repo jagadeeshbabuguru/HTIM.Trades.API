@@ -36,16 +36,16 @@ namespace HTIM.Trades.Api.Controllers
 
         [HttpGet("deletetrade")]
         [Authorize(Policy = "AppRights")]
-        public async Task<bool> deletetrade(string tradesToUpdate, string overridesToUpdate)
+        public async Task<bool> deletetrade(string tradesTodelete, string overridesTodelete)
         {
-            bool result = await this._TradesFacade.deleteTrades(tradesToUpdate, overridesToUpdate);
+            bool result = await this._TradesFacade.deleteTrades(tradesTodelete, overridesTodelete);
             return result;
         }
         [HttpGet("createtrade")]
         [Authorize(Policy = "AppRights")]
-        public async Task<bool> createtrade(string tradesToUpdate, string overridesToUpdate)
+        public async Task<bool> createtrade(string tradesToInsert, string overridesToInsert)
         {
-            bool result = await this._TradesFacade.insertTrades(tradesToUpdate, overridesToUpdate);
+            bool result = await this._TradesFacade.insertTrades(tradesToInsert, overridesToInsert);
             return result;
         }
     }

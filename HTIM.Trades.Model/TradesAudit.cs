@@ -1,8 +1,7 @@
-﻿
-namespace HTIM.Trades.Model
+﻿namespace HTIM.Trades.Model
 {
     [System.Serializable]
-    public class Trade
+    public class TradesAudit
     {
         public int? rowID { set; get; }
         public String? bcusip { set; get; }
@@ -61,13 +60,17 @@ namespace HTIM.Trades.Model
         public decimal? tradeYTC { set; get; }
         public decimal? tradeDuration { set; get; }
         public decimal? tradeSpread { set; get; }
-        public decimal? tradeWAL { set; get; }    
+        public decimal? tradeWAL { set; get; }
         public bool? tradeExcluded { set; get; }
         public bool? tradeCancelled { set; get; }
         public DateTime? loadDate { set; get; }
-        public DateTime? deleteDate { set; get;}
-        public DateTime? modifiedDate { set; get;}
-        public List<TradesOverride>? overrides { set; get; }
+        public DateTime? deleteDate { set; get; }
+        public DateTime? modifiedDate { set; get; }
+        public bool StatusCd { set; get; }
+        public bool IsApproved { set; get; }
+        public string? ApprovedBy { set; get; }
+        public bool IsUpdated { set; get; }
+        public bool IsDeleted { set; get; }
 
     }
 }

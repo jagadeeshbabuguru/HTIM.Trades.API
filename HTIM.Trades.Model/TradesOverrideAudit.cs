@@ -2,7 +2,7 @@
 namespace HTIM.Trades.Model
 {
     [System.Serializable]
-    public class TradesOverride
+    public class TradesOverrideAudit
     {
         public int? tradesOverrideID { set; get; }
         public int tradeID { set; get; }
@@ -32,7 +32,11 @@ namespace HTIM.Trades.Model
         public DateTime? createDate { set; get; }
         public DateTime? deleteDate { set; get; }
         public int? tradeVersion { set; get; }
-
+        public bool StatusCd { set; get; }
+        public bool IsApproved { set; get; }
+        public string? ApprovedBy { set; get; }
+        public bool IsUpdated { set; get; }
+        public bool IsDeleted { set; get; }
     }
 }
 
