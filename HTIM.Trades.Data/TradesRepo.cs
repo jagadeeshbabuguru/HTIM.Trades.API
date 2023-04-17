@@ -146,9 +146,6 @@ namespace HTIM.Trades.Data
             string Change_id = "Trades Viewer API";
             try
             {
-                //var parameters = buildParameters(loan, 1);
-                using (_connection)
-                {
                     _connection.Open();
                     foreach (Trade trade in trades)
                     {
@@ -230,7 +227,6 @@ namespace HTIM.Trades.Data
                             break;
                     }
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {
@@ -248,9 +244,6 @@ namespace HTIM.Trades.Data
             string Change_id = "Trades Viewer API";
             try
             {
-                //var parameters = buildParameters(loan, 1);
-                using (_connection)
-                {
                     _connection.Open();
                     foreach (Trade trade in trades)
                     {
@@ -332,7 +325,6 @@ namespace HTIM.Trades.Data
                             break;
                     }
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {
@@ -348,9 +340,6 @@ namespace HTIM.Trades.Data
             string Change_id = "Trades Viewer API";
             try
             {
-                //var parameters = buildParameters(loan, 1);
-                using (_connection)
-                {
                     _connection.Open();
                     foreach (Trade trade in trades)
                     {
@@ -431,7 +420,6 @@ namespace HTIM.Trades.Data
                             break;
                     }
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {
@@ -448,9 +436,6 @@ namespace HTIM.Trades.Data
             string Change_id = "Trades Viewer API";
             try
             {
-                //var parameters = buildParameters(loan, 1);
-                using (_connection)
-                {
                     _connection.Open();
                     foreach (TradesOverride troverrides in overrides)
                     {
@@ -496,7 +481,6 @@ namespace HTIM.Trades.Data
                             break;
                     }
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {
@@ -577,9 +561,6 @@ namespace HTIM.Trades.Data
             string Change_id = "Trades Viewer API";
             try
             {
-                //var parameters = buildParameters(loan, 1);
-                using (_connection)
-                {
                     _connection.Open();
                     foreach (TradesOverride troverrides in overrides)
                     {
@@ -626,7 +607,6 @@ namespace HTIM.Trades.Data
                             break;
                     }
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {

@@ -104,7 +104,7 @@ namespace HTIM.Trades.Services
 
         public async Task<bool> updateTrades(string trades,string overrides)
         {
-            List<Trade> tradesList = await this.deserializeTrades(trades);
+            List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
             List<TradesOverride> overridesList = await this.deserializeTradeOverrides(overrides);        
             return await _tradeRepo.Update(tradesList,overridesList);
         }

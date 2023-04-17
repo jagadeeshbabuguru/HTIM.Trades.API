@@ -11,7 +11,7 @@ namespace HTIM.Trades.Services
         public static IServiceCollection AddServiceAccessInterface(this IServiceCollection services,
             IConfiguration configuration)
         {            
-            services.AddTransient<ITradesRepo, TradesRepo>(provider =>
+            services.AddSingleton<ITradesRepo, TradesRepo>(provider =>
             {
                 var connectionString = configuration.GetConnectionString("SqlConnection");
                 var connection = new SqlConnection(connectionString);
