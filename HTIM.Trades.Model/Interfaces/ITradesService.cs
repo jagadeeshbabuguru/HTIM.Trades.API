@@ -16,5 +16,7 @@ namespace HTIM.Trades.Services
         Task<bool> insertTrades(string trades, string overrides);
         Task<List<TradesAudit>> tradesToApprove();
         Task<List<TradesOverrideAudit>> overridesToApprove();
+        Task<bool> approveTrades(string tradeIds, string approver);
+        Task<bool> approveOverrides(string overrideIds, string approver);
     }
 }

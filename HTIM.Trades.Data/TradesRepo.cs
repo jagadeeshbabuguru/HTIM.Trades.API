@@ -627,5 +627,53 @@ namespace HTIM.Trades.Data
             IEnumerable<TradesOverrideAudit> overridesAudit = await GetTableValuesBySp<TradesOverrideAudit>("TradesViewer.GetOverridesFromAudit");
             return overridesAudit.ToList();
         }
+
+        public async Task<bool> approveTrades(List<int> tradeIds, string approver)
+        {
+            int returnVal = 0;
+            int transValue = 0;
+            string storedProc = "TradesViewer.ApproveLoan";
+            try
+            {
+                    _connection.Open();
+                    foreach (var id in tradeIds)
+                    {
+                        transValue = Math.Abs(await _connection.ExecuteAsync("TradesViewer.Approve",
+                            new { id = id, approvedBy = approver,flag=1 },
+                            commandType: CommandType.StoredProcedure));
+                        returnVal += transValue;
+                    }
+                    _connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return returnVal == tradeIds.Count ? true : false;
+        }
+
+        public async Task<bool> approveOverrides(List<int> overrideIds, string approver)
+        {
+            int returnVal = 0;
+            int transValue = 0;
+            string storedProc = "TradesViewer.ApproveLoan";
+            try
+            {
+                    _connection.Open();
+                    foreach (var id in overrideIds)
+                    {
+                        transValue = Math.Abs(await _connection.ExecuteAsync("TradesViewer.Approve",
+                            new { id = id, approvedBy = approver, flag = 2 },
+                            commandType: CommandType.StoredProcedure));
+                        returnVal += transValue;
+                    }
+                    _connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return returnVal == overrideIds.Count ? true : false;
+        }
     }
 }

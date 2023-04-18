@@ -49,5 +49,15 @@ namespace HTIM.Trades.Business.Facade
         {
             return await _tradeService.overridesToApprove();
         }
+
+        public async Task<bool> approveTrades(string tradeIds, string approver)
+        {
+           return await _tradeService.approveTrades(tradeIds, approver);    
+        }
+
+        public async Task<bool> approveOverrides(string overrideIds, string approver)
+        {
+            return await _tradeService.approveOverrides(overrideIds, approver); 
+        }
     }
 }

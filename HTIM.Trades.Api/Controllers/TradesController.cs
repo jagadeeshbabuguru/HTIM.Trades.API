@@ -60,5 +60,17 @@ namespace HTIM.Trades.Api.Controllers
         {
             return await this._TradesFacade.overridesToApprove();
         }
+        [HttpGet("approvetrades")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<bool> approvetrades(string tradesIds)
+        {
+            return await this._TradesFacade.approveTrades(tradesIds, User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
+        }
+        [HttpGet("approveoverrides")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<bool> approveoverrides(string overrideIds)
+        {
+            return await this._TradesFacade.approveOverrides(overrideIds, User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
+        } 
     }
 }

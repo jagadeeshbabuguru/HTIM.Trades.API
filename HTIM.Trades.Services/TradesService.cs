@@ -101,6 +101,20 @@ namespace HTIM.Trades.Services
 
             return result;
         }
+        private async Task<List<int>> deserializeIds(string jsonData)
+        {
+            List<int> result = null;
+            try
+            {
+                result = JsonSerializer.Deserialize<List<int>>(jsonData);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+        }
 
         public async Task<bool> updateTrades(string trades,string overrides)
         {
@@ -156,6 +170,16 @@ namespace HTIM.Trades.Services
         public async Task<List<TradesOverrideAudit>> overridesToApprove()
         {
             return await _tradeRepo.overridesToApprove();
+        }
+
+        public async Task<bool> approveTrades(string tradeIds, string approver)
+        {
+            return await _tradeRepo.approveTrades(await deserializeIds(tradeIds),approver);
+        }
+
+        public async Task<bool> approveOverrides(string overrideIds, string approver)
+        {
+            return await _tradeRepo.approveOverrides(await deserializeIds(overrideIds), approver);
         }
     }
 }
