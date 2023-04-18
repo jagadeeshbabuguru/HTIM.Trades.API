@@ -614,5 +614,18 @@ namespace HTIM.Trades.Data
             }
             return successFlag;
         }
+
+        public async Task<List<TradesAudit>> tradesToApprove()
+        {
+            IEnumerable<TradesAudit> tradesAudit = await GetTableValuesBySp<TradesAudit>("TradesViewer.GetAllTradesFromAudit");
+            return tradesAudit.ToList();
+
+        }
+
+        public async Task<List<TradesOverrideAudit>> overridesToApprove()
+        {
+            IEnumerable<TradesOverrideAudit> overridesAudit = await GetTableValuesBySp<TradesOverrideAudit>("TradesViewer.GetOverridesFromAudit");
+            return overridesAudit.ToList();
+        }
     }
 }

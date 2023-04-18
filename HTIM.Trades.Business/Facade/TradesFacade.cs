@@ -2,6 +2,7 @@
 using HTIM.Trades.Business.Interfaces;
 using HTIM.Trades.Model;
 using HTIM.Trades.Services;
+using System.Diagnostics;
 
 namespace HTIM.Trades.Business.Facade
 {
@@ -37,6 +38,16 @@ namespace HTIM.Trades.Business.Facade
         public async Task<bool> updateTrades(string trades, string overrides)
         {
             return await _tradeService.updateTrades(trades,overrides);
+        }
+
+        public async Task<List<TradesAudit>> tradesToApprove()
+        {
+            return await _tradeService.tradesToApprove();
+        }
+
+        public async Task<List<TradesOverrideAudit>> overridesToApprove()
+        {
+            return await _tradeService.overridesToApprove();
         }
     }
 }

@@ -48,5 +48,17 @@ namespace HTIM.Trades.Api.Controllers
             bool result = await this._TradesFacade.insertTrades(tradesToInsert, overridesToInsert);
             return result;
         }
+        [HttpGet("tradestoapprove")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<List<TradesAudit>> tradestoapprove()
+        {
+            return await this._TradesFacade.tradesToApprove();
+        }
+        [HttpGet("overridestoapprove")]
+        [Authorize(Policy = "AppRights")]
+        public async Task<List<TradesOverrideAudit>> overridestoapprove()
+        {
+            return await this._TradesFacade.overridesToApprove();
+        }
     }
 }

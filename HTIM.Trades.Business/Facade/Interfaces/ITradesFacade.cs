@@ -12,5 +12,8 @@ namespace HTIM.Trades.Business.Interfaces
         Task<bool> updateTrades(string trades,string overrides);
         Task<bool> deleteTrades(string trades, string overrides);
         Task<bool> insertTrades(string trades, string overrides);
+
+        Task<List<TradesAudit>> tradesToApprove();
+        Task<List<TradesOverrideAudit>> overridesToApprove();
     }
 }

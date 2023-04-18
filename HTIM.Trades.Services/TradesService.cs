@@ -147,5 +147,15 @@ namespace HTIM.Trades.Services
             //}
             //return (isTradeeSuccess && isOverrideSuccess) ? true : false;
         }
+
+        public async Task<List<TradesAudit>> tradesToApprove()
+        {
+            return await _tradeRepo.tradesToApprove();
+        }
+
+        public async Task<List<TradesOverrideAudit>> overridesToApprove()
+        {
+            return await _tradeRepo.overridesToApprove();
+        }
     }
 }

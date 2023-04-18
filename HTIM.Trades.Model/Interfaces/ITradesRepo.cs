@@ -14,6 +14,8 @@ public interface ITradesRepo
         Task<bool> deleteOverrides(List<TradesOverride> overrides);
         Task<bool> insertTrades(List<Trade> trades);
         Task<bool> insertOverrides( List<TradesOverride> overrides);
+        Task<List<TradesAudit>> tradesToApprove();
+        Task<List<TradesOverrideAudit>> overridesToApprove();
 
     }
 }
