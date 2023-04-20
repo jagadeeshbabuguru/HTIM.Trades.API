@@ -36,26 +36,6 @@ namespace HTIM.Trades.Data
             return new List<TradesOverride>();
         }
 
-        //private async Task<IEnumerable<T>> GetTableValues<T>(string spName, bool isByProcessCode,bool isByDate,bool isOutOfThresholdLogs, string? processCode,DateTime? fromDate,DateTime? toDate)
-        //{
-        //    IEnumerable<T> returnVal = new List<T>();
-        //    var dataTable = new DataTable();
-        //    try
-        //    {
-        //        using (_connection)
-        //        {
-        //            _connection.Open();
-        //            returnVal = await _connection.QueryAsync<T>(spName, new { isByProcessCode, isByDate, isOutOfThresholdLogs,processCode,fromDate,toDate }, commandType: CommandType.StoredProcedure);
-        //            _connection.Close();
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    return returnVal;
-        //}
-
          private async Task<IEnumerable<T>> GetTableValues<T>(string spName, bool isByProcessCode,bool isByDate,bool isOutOfThresholdLogs, string? processCode,DateTime? fromDate,DateTime? toDate)
         {
             IEnumerable<T> returnVal = new List<T>();
@@ -149,7 +129,7 @@ namespace HTIM.Trades.Data
                     _connection.Open();
                     foreach (Trade trade in trades)
                     {
-                        returnVal = await _connection.ExecuteAsync("TradesViewer.InsertTrade", new
+                        returnVal = await _connection.ExecuteScalarAsync<int>("TradesViewer.InsertTrade", new
                         {
                             trade.rowID,
                             trade.bcusip,
@@ -221,7 +201,7 @@ namespace HTIM.Trades.Data
                             flag = 2
 
                         }, commandType: CommandType.StoredProcedure) ;
-                        if (returnVal == 0)
+                        if (returnVal != 0)
                             successFlag = false;
                         if (!successFlag)
                             break;
@@ -247,7 +227,7 @@ namespace HTIM.Trades.Data
                     _connection.Open();
                     foreach (Trade trade in trades)
                     {
-                        returnVal = await _connection.ExecuteAsync("TradesViewer.InsertTrade", new
+                        returnVal =await _connection.ExecuteScalarAsync<int>("TradesViewer.InsertTrade", new
                         {
                             trade.rowID,
                             trade.bcusip,
@@ -319,7 +299,7 @@ namespace HTIM.Trades.Data
                             flag = 3
 
                         }, commandType: CommandType.StoredProcedure);
-                        if (returnVal == 0)
+                        if (returnVal != 0)
                             successFlag = false;
                         if (!successFlag)
                             break;
@@ -343,7 +323,7 @@ namespace HTIM.Trades.Data
                     _connection.Open();
                     foreach (Trade trade in trades)
                     {
-                        returnVal = await _connection.ExecuteAsync("TradesViewer.InsertTrade", new
+                        returnVal = await _connection.ExecuteScalarAsync<int>("TradesViewer.InsertTrade", new
                         {
                             trade.bcusip,
                             trade.fundNumber,
@@ -414,7 +394,7 @@ namespace HTIM.Trades.Data
                             flag=1
 
                         }, commandType: CommandType.StoredProcedure);
-                        if (returnVal == 0)
+                        if (returnVal != 0)
                             successFlag = false;
                         if (!successFlag)
                             break;
@@ -439,7 +419,7 @@ namespace HTIM.Trades.Data
                     _connection.Open();
                     foreach (TradesOverride troverrides in overrides)
                     {
-                        returnVal = await _connection.ExecuteAsync("TradesViewer.OverridesCRUD", new
+                        returnVal = await _connection.ExecuteScalarAsync<int>("TradesViewer.OverridesCRUD", new
                         {
                             troverrides.tradeID,
                             troverrides.tradeEffectiveDate,
@@ -475,7 +455,7 @@ namespace HTIM.Trades.Data
                             flag = 1
 
                         }, commandType: CommandType.StoredProcedure);
-                        if (returnVal == 0)
+                        if (returnVal != 0)
                             successFlag = false;
                         if (!successFlag)
                             break;
@@ -496,13 +476,10 @@ namespace HTIM.Trades.Data
             string Change_id = "Trades Viewer API";
             try
             {
-                using (_connection)
-                {
-                    //var parameters = buildParameters(loan, 1);
                     _connection.Open();
                     foreach (TradesOverride troverrides in overrides)
                     {
-                        returnVal = await _connection.ExecuteAsync("TradesViewer.OverridesCRUD", new
+                        returnVal = await _connection.ExecuteScalarAsync<int>("TradesViewer.OverridesCRUD", new
                         {
                             troverrides.tradesOverrideID,
                             troverrides.tradeID,
@@ -539,13 +516,12 @@ namespace HTIM.Trades.Data
                             flag = 2
 
                         }, commandType: CommandType.StoredProcedure);
-                        if (returnVal == 0)
+                        if (returnVal != 0)
                             successFlag = false;
                         if (!successFlag)
                             break;
                     }
                     _connection.Close();
-                }
             }
             catch (SqlException ex)
             {
@@ -564,7 +540,7 @@ namespace HTIM.Trades.Data
                     _connection.Open();
                     foreach (TradesOverride troverrides in overrides)
                     {
-                        returnVal = await _connection.ExecuteAsync("TradesViewer.OverridesCRUD", new
+                        returnVal = await _connection.ExecuteScalarAsync<int>("TradesViewer.OverridesCRUD", new
                         {
                             troverrides.tradesOverrideID,
                             troverrides.tradeID,
@@ -601,7 +577,7 @@ namespace HTIM.Trades.Data
                             flag = 3
 
                         }, commandType: CommandType.StoredProcedure);
-                        if (returnVal == 0)
+                        if (returnVal != 0)
                             successFlag = false;
                         if (!successFlag)
                             break;
