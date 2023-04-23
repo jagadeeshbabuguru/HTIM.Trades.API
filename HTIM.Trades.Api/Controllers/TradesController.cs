@@ -30,7 +30,7 @@ namespace HTIM.Trades.Api.Controllers
         [Authorize(Policy = "AppRights")]
         public async Task<bool> updatetrade(string tradesToUpdate,string overridesToUpdate)
         {
-            bool result = await this._TradesFacade.updateTrades(tradesToUpdate,overridesToUpdate);
+            bool result = await this._TradesFacade.updateTrades(tradesToUpdate,overridesToUpdate, User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
             return result;
         }
 
@@ -38,27 +38,27 @@ namespace HTIM.Trades.Api.Controllers
         [Authorize(Policy = "AppRights")]
         public async Task<bool> deletetrade(string tradesTodelete, string overridesTodelete)
         {
-            bool result = await this._TradesFacade.deleteTrades(tradesTodelete, overridesTodelete);
+            bool result = await this._TradesFacade.deleteTrades(tradesTodelete, overridesTodelete, User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
             return result;
         }
         [HttpGet("createtrade")]
         [Authorize(Policy = "AppRights")]
         public async Task<bool> createtrade(string tradesToInsert, string overridesToInsert)
         {
-            bool result = await this._TradesFacade.insertTrades(tradesToInsert, overridesToInsert);
+            bool result = await this._TradesFacade.insertTrades(tradesToInsert, overridesToInsert, User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
             return result;
         }
         [HttpGet("tradestoapprove")]
         [Authorize(Policy = "AppRights")]
         public async Task<List<TradesAudit>> tradestoapprove()
         {
-            return await this._TradesFacade.tradesToApprove();
+            return await this._TradesFacade.tradesToApprove(User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
         }
         [HttpGet("overridestoapprove")]
         [Authorize(Policy = "AppRights")]
         public async Task<List<TradesOverrideAudit>> overridestoapprove()
         {
-            return await this._TradesFacade.overridesToApprove();
+            return await this._TradesFacade.overridesToApprove(User.Identities.FirstOrDefault().Name.Split('@')[0].Replace('.', ' '));
         }
         [HttpGet("approvetrades")]
         [Authorize(Policy = "AppRights")]

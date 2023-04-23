@@ -32,6 +32,7 @@ namespace HTIM.Trades.Model
         public DateTime? createDate { set; get; }
         public DateTime? deleteDate { set; get; }
         public int? tradeVersion { set; get; }
+        public int? isFromAudit { set; get; }
 
     }
 }

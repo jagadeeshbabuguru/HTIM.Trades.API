@@ -68,6 +68,7 @@ namespace HTIM.Trades.Model
         public DateTime? deleteDate { set; get;}
         public DateTime? modifiedDate { set; get;}
         public List<TradesOverride>? overrides { set; get; }
+        public int? isFromAudit { set; get; }
 
     }
 }

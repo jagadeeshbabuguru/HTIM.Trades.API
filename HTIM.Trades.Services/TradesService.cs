@@ -65,35 +65,35 @@ namespace HTIM.Trades.Services
             return result;
         }
 
-        public async Task<bool> updateTrades(string trades,string overrides)
+        public async Task<bool> updateTrades(string trades,string overrides,string user)
         {
             List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
             List<TradesOverride> overridesList = await this.deserializeTradeOverrides(overrides);        
-            return await _tradeRepo.Update(tradesList,overridesList);
+            return await _tradeRepo.Update(tradesList,overridesList,user);
         }
 
-        public async Task<bool> deleteTrades(string trades, string overrides)
+        public async Task<bool> deleteTrades(string trades, string overrides,string user)
         {
             List<Trade> tradesList = await this.deserializeTrades(trades);
             List<TradesOverride> overridesList = await this.deserializeTradeOverrides(overrides);
-            return await _tradeRepo.Delete(tradesList, overridesList);
+            return await _tradeRepo.Delete(tradesList, overridesList,user);
         }
 
-        public async Task<bool> insertTrades(string trades, string overrides)
+        public async Task<bool> insertTrades(string trades, string overrides, string user)
         {
             List<Trade> tradesList = await this.deserializeTrades(trades.Replace("\"overrides\":{", "\"overrides\":[{").Replace("}}", "}]}"));
             List<TradesOverride> overridesList = await this.deserializeTradeOverrides(overrides);
-            return await _tradeRepo.Insert(tradesList, overridesList);
+            return await _tradeRepo.Insert(tradesList, overridesList,user);
         }
 
-        public async Task<List<TradesAudit>> tradesToApprove()
+        public async Task<List<TradesAudit>> tradesToApprove(string user)
         {
-            return await _tradeRepo.tradesToApprove();
+            return await _tradeRepo.tradesToApprove(user);
         }
 
-        public async Task<List<TradesOverrideAudit>> overridesToApprove()
+        public async Task<List<TradesOverrideAudit>> overridesToApprove(string user)
         {
-            return await _tradeRepo.overridesToApprove();
+            return await _tradeRepo.overridesToApprove(user);
         }
 
         public async Task<bool> approveTrades(string tradeIds, string approver)

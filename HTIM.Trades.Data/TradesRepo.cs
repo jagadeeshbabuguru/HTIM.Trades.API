@@ -72,53 +72,69 @@ namespace HTIM.Trades.Data
             }
             return returnVal;
         }
+        private async Task<IEnumerable<T>> GetTableValuesBySpWithParams<T>(string spName,string user)
+        {
+            IEnumerable<T> returnVal = new List<T>();
+            var dataTable = new DataTable();
+            try
+            {
+                _connection.Open();
+                returnVal = await _connection.QueryAsync<T>(spName, new { Approver = user }, commandType: CommandType.StoredProcedure);
+                _connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return returnVal;
+        }
 
-        public async Task<bool> Update(List<Trade> trades,List<TradesOverride> overrides)
+        public async Task<bool> Update(List<Trade> trades,List<TradesOverride> overrides, string user)
         {
             bool isTradeeSuccess = false, isOverrideSuccess = false;
             if (trades.Count() > 0)
-                isTradeeSuccess = await this.updateTrades(trades);
+                isTradeeSuccess = await this.updateTrades(trades,user);
             else
                 isTradeeSuccess = true;
             if (overrides.Count() > 0)
-                isOverrideSuccess = await this.updateOverrides(overrides);
+                isOverrideSuccess = await this.updateOverrides(overrides,user);
             else
                 isOverrideSuccess = true;
 
             return (isTradeeSuccess && isOverrideSuccess) ? true : false;
         }
 
-        public async Task<bool> Delete(List<Trade> trades, List<TradesOverride> overrides)
+        public async Task<bool> Delete(List<Trade> trades, List<TradesOverride> overrides, string user  )
         {
             bool isTradeeSuccess = false, isOverrideSuccess = false;
             if (trades.Count() > 0)
-                isTradeeSuccess = await this.deleteTrades(trades);
+                isTradeeSuccess = await this.deleteTrades(trades, user);
             else
                 isTradeeSuccess = true;
             if (overrides.Count() > 0)
-                isOverrideSuccess = await this.deleteOverrides(overrides);
+                isOverrideSuccess = await this.deleteOverrides(overrides, user);
             else
                 isOverrideSuccess = true;
 
             return (isTradeeSuccess && isOverrideSuccess) ? true : false;
         }
 
-        public async Task<bool> Insert(List<Trade> trades, List<TradesOverride> overrides)
+        public async Task<bool> Insert(List<Trade> trades, List<TradesOverride> overrides, string user)
         {
             bool isTradeeSuccess = false, isOverrideSuccess = false;
             if (trades.Count() > 0)
-                isTradeeSuccess = await this.insertTrades(trades);
+                isTradeeSuccess = await this.insertTrades(trades, user);
             else
                 isTradeeSuccess = true;
             if (overrides.Count() > 0)
-                isOverrideSuccess = await this.insertOverrides(overrides);
+                isOverrideSuccess = await this.insertOverrides(overrides, user);
             else
                 isOverrideSuccess = true;
 
             return (isTradeeSuccess && isOverrideSuccess) ? true : false;
         }
 
-        public async Task<bool> updateTrades(List<Trade> trades)
+        public async Task<bool> updateTrades(List<Trade> trades,string user)
         {
             int returnVal = 0;
             Boolean successFlag = true;
@@ -198,6 +214,7 @@ namespace HTIM.Trades.Data
                             IsApproved = false,
                             IsUpdated = true,
                             IsDeleted = false,
+                            EnteredBy = user,
                             flag = 2
 
                         }, commandType: CommandType.StoredProcedure) ;
@@ -216,7 +233,7 @@ namespace HTIM.Trades.Data
         }
        
 
-        public async Task<bool> deleteTrades(List<Trade> trades)
+        public async Task<bool> deleteTrades(List<Trade> trades, string user)
         {
             int returnVal = 0;
             Boolean successFlag = true;
@@ -296,6 +313,7 @@ namespace HTIM.Trades.Data
                             IsApproved = false,
                             IsUpdated = false,
                             IsDeleted = true,
+                            EnteredBy=user,
                             flag = 3
 
                         }, commandType: CommandType.StoredProcedure);
@@ -312,7 +330,7 @@ namespace HTIM.Trades.Data
             }
             return successFlag;
         }
-        public async Task<bool> insertTrades(List<Trade> trades)
+        public async Task<bool> insertTrades(List<Trade> trades, string user)
         {
             int returnVal = 0;
             Boolean successFlag = true;
@@ -391,7 +409,8 @@ namespace HTIM.Trades.Data
                             IsApproved=false,
                             IsUpdated=false,
                             IsDeleted=false,
-                            flag=1
+                            EnteredBy = user,
+                            flag =1
 
                         }, commandType: CommandType.StoredProcedure);
                         if (returnVal != 0)
@@ -408,7 +427,7 @@ namespace HTIM.Trades.Data
             return successFlag;
         }
 
-        public async Task<bool> insertOverrides(List<TradesOverride> overrides)
+        public async Task<bool> insertOverrides(List<TradesOverride> overrides, string user)
         {
             int returnVal = 0;
             Boolean successFlag = true;
@@ -452,6 +471,7 @@ namespace HTIM.Trades.Data
                             IsApproved=false,
                             IsUpdated=false,
                             IsDeleted=false,
+                            EnteredBy = user,
                             flag = 1
 
                         }, commandType: CommandType.StoredProcedure);
@@ -468,7 +488,7 @@ namespace HTIM.Trades.Data
             }
             return successFlag;
         }
-        public async Task<bool> updateOverrides(List<TradesOverride> overrides)
+        public async Task<bool> updateOverrides(List<TradesOverride> overrides, string user)
         {
             int returnVal = 0;
             Boolean successFlag = true;
@@ -513,6 +533,7 @@ namespace HTIM.Trades.Data
                             IsApproved = false,
                             IsUpdated = true,
                             IsDeleted = false,
+                            EnteredBy = user,
                             flag = 2
 
                         }, commandType: CommandType.StoredProcedure);
@@ -529,7 +550,7 @@ namespace HTIM.Trades.Data
             }
             return successFlag;
         }
-        public async Task<bool> deleteOverrides(List<TradesOverride> overrides)
+        public async Task<bool> deleteOverrides(List<TradesOverride> overrides, string user)
         {
             int returnVal = 0;
             Boolean successFlag = true;
@@ -574,6 +595,7 @@ namespace HTIM.Trades.Data
                             IsApproved = false,
                             IsUpdated = false,
                             IsDeleted = true,
+                            EnteredBy = user,
                             flag = 3
 
                         }, commandType: CommandType.StoredProcedure);
@@ -591,16 +613,16 @@ namespace HTIM.Trades.Data
             return successFlag;
         }
 
-        public async Task<List<TradesAudit>> tradesToApprove()
+        public async Task<List<TradesAudit>> tradesToApprove(string user)
         {
-            IEnumerable<TradesAudit> tradesAudit = await GetTableValuesBySp<TradesAudit>("TradesViewer.GetAllTradesFromAudit");
+            IEnumerable<TradesAudit> tradesAudit = await GetTableValuesBySpWithParams<TradesAudit>("TradesViewer.GetAllTradesFromAudit",user);
             return tradesAudit.ToList();
 
         }
 
-        public async Task<List<TradesOverrideAudit>> overridesToApprove()
+        public async Task<List<TradesOverrideAudit>> overridesToApprove(string user)
         {
-            IEnumerable<TradesOverrideAudit> overridesAudit = await GetTableValuesBySp<TradesOverrideAudit>("TradesViewer.GetOverridesFromAudit");
+            IEnumerable<TradesOverrideAudit> overridesAudit = await GetTableValuesBySpWithParams<TradesOverrideAudit>("TradesViewer.GetOverridesFromAudit",user);
             return overridesAudit.ToList();
         }
 
